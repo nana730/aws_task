@@ -3,11 +3,24 @@ lock "~> 3.19.1"
 
 set :application, "cdp_web_web_aws_deploy_task"
 set :repo_url, "https://github.com/diveintocode-corp/cdp_web_web_aws_deploy_task.git"
+set :linked_files, %w{config/secrets.yml}   # 4
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
+set :keep_releases, 5
 set :bundle_without, %w{test}.join(':')
+set :log_level, :info
 
 set :rbenv_version, '3.3.0'
 
 append :linked_files, 'config/secrets.yml'
+
+after 'deploy:finished', 'deploy:restart'
+
+namespace :deploy do
+  desc 'Restart application'
+   task :restart do
+     invoke 'unicorn:restart'
+   end
+ end
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
