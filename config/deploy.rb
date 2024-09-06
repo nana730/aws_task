@@ -6,7 +6,7 @@ set :repo_url, "https://github.com/diveintocode-corp/cdp_web_web_aws_deploy_task
 set :linked_files, %w{config/secrets.yml}   # 4
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
 set :keep_releases, 5
-set :bundle_without, %w{test}.join(':')
+# set :bundle_without, %w{test}.join(':')
 set :log_level, :info
 
 set :rbenv_version, '3.3.0'
